@@ -93,7 +93,7 @@ function SearchBar({ searchTerm, onSearch, placeholder = "Поиск по наз
         onMouseLeave={(e) => e.target.style.opacity = "1"}
         onClick={() => {}}
       >
-        🔍 Найти
+        {'\u{1F50D}'} Найти
       </button>
     </div>
   );

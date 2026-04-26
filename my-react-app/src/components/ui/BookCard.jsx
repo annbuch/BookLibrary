@@ -147,7 +147,7 @@ function BookCard({ book, onBorrow, onDetails }) {
             if (book.available) e.target.style.opacity = "1";
           }}
         >
-          {book.available ? "📖 Взять книгу" : "❌ Недоступна"}
+          {book.available ? " Взять книгу" : " Недоступна"}
         </button>
         <button 
           style={secondaryButtonStyle}

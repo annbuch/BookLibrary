@@ -83,7 +83,7 @@ const cardStyle = {
       }}
     >
       <div style={avatarStyle}>
-        📚
+        {'\u{1F4DA}'}
       </div>
       <h3 style={nameStyle}>{author.name}</h3>
       <p style={infoStyle}>
@@ -93,7 +93,7 @@ const cardStyle = {
         <span style={labelStyle}>Страна:</span> {author.country}
       </p>
       <div style={bookCountStyle}>
-        📖 {author.bookCount} книга(и)
+         {author.bookCount} книга(и)
       </div>
       <button 
         style={buttonStyle}

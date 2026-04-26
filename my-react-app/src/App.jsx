@@ -1,35 +1,35 @@
 import { books, authors, genres } from "./data/booksData";
-import BookCard from "./components/BookCard";
-import AuthorCard from "./components/AuthorCard";
-import SearchBar from "./components/SearchBar";
-import GenreFilter from "./components/GenreFilter";
-import BookStatus from "./components/BookStatus";
+import BookCard from "./components/ui/BookCard";
+import AuthorCard from "./components/ui/AuthorCard";
+import SearchBar from "./components/ui/SearchBar";
+import GenreFilter from "./components/ui/GenreFilter";
+import BookStatus from "./components/ui/BookStatus";
 
 function App() {
   // Заглушки для обработчиков событий (без useState/useEffect)
   const handleSearch = (term) => {
-    alert(`🔍 Заглушка: поиск "${term}"\n(Фильтрация будет реализована с useState в следующем семестре)`);
+    alert(` Заглушка: поиск "${term}"\n(будет реализовано с useState)`);
   };
 
   const handleGenreSelect = (genre) => {
-    alert(`🏷️ Заглушка: фильтр по жанру "${genre}"\n(Фильтрация будет реализована с useState в следующем семестре)`);
+    alert(` Заглушка: фильтр по жанру "${genre}"\n(будет реализовано с useState)`);
   };
 
   const handleBorrow = (bookId) => {
     const book = books.find(b => b.id === bookId);
-    alert(`📖 Заглушка: книга "${book?.title}" взята\n(Состояние будет управляться через useState в следующем семестре)`);
+    alert(` Заглушка: книга "${book?.title}" взята\n(будет реализовано с useState)`);
   };
 
   const handleDetails = (bookId) => {
     const book = books.find(b => b.id === bookId);
-    alert(`📚 Заглушка: подробнее о книге "${book?.title}"\nАвтор: ${book?.author}\nЖанр: ${book?.genre}\nРейтинг: ${book?.rating}\n${book?.description}`);
+    alert(` Заглушка: подробнее о книге "${book?.title}"\nАвтор: ${book?.author}\nЖанр: ${book?.genre}\nРейтинг: ${book?.rating}\n${book?.description}`);
   };
 
   const handleViewAuthorBooks = (authorId) => {
     const author = authors.find(a => a.id === authorId);
     const authorBooks = books.filter(b => b.author === author.name);
     const bookTitles = authorBooks.map(b => `"${b.title}"`).join(", ");
-    alert(`📖 Заглушка: книги автора ${author?.name}:\n${bookTitles}`);
+    alert(` Заглушка: книги автора ${author?.name}:\n${bookTitles}`);
   };
 
   const headerStyle = {
@@ -101,7 +101,7 @@ function App() {
   return (
     <div>
       <header style={headerStyle}>
-        <h1 style={titleStyle}>📖 BookLibrary</h1>
+        <h1 style={titleStyle}> BookLibrary</h1>
         <p style={subtitleStyle}>Ваша персональная библиотека книг</p>
       </header>
 
@@ -126,7 +126,7 @@ function App() {
 
         {/* Секция книг с BookCard */}
         <div style={sectionStyle}>
-          <h2 style={sectionTitleStyle}>📚 Все книги ({books.length})</h2>
+          <h2 style={sectionTitleStyle}>{'\u{1F4DA}'} Все книги ({books.length})</h2>
           <div style={gridStyle}>
             {books.map((book) => (
               <BookCard
@@ -140,7 +140,7 @@ function App() {
         </div>
       {/* Секция авторов с AuthorCard */}
         <div style={sectionStyle}>
-          <h2 style={sectionTitleStyle}>👨‍💼 Авторы ({authors.length})</h2>
+          <h2 style={sectionTitleStyle}> Авторы ({authors.length})</h2>
           <div style={gridStyle}>
             {authors.map((author) => (
               <AuthorCard
@@ -152,19 +152,7 @@ function App() {
           </div>
         </div>
 
-        {/* Демонстрация компонента BookStatus */}
-        <div style={demoStatusStyle}>
-          <h3 style={demoTitleStyle}>📌 Компонент BookStatus (статус книги)</h3>
-          <div style={demoRowStyle}>
-            <BookStatus available={true} />
-            <BookStatus available={false} reservedCount={3} />
-            <BookStatus available={false} reservedCount={5} />
-          </div>
-          <p style={{ fontSize: "12px", color: "#888", marginTop: "10px" }}>
-            Используется внутри BookCard для отображения доступности книги
-          </p>
-        </div>
-      </main>
+         </main>
     </div>
   );
 }
