@@ -1,5 +1,3 @@
-// Моковые данные для библиотеки BookLibrary
-
 export const books = [
   {
     id: 1,
