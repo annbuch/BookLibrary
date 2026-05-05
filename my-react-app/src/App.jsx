@@ -8,6 +8,14 @@ import GenreFilter from "./components/ui/GenreFilter";
 function App() {
   // Состояние книг (доступность изменяется)
   const [books, setBooks] = useState(initialBooks);
+
+  // ========== ОТЛАДОЧНЫЙ ВЫВОД В КОНСОЛЬ (Console Tab) ==========
+  console.group('📚 BookLibrary App');
+  console.log('Всего книг в библиотеке:', books.length);
+  console.table(books.map(b => ({ title: b.title, available: b.available })));
+  console.groupEnd();
+  // ==============================================================
+
   // Состояния фильтров
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("Все жанры");
@@ -61,8 +69,7 @@ function App() {
       setSelectedAuthorId(null);
     } else {
       setSelectedAuthorId(authorId);
-      // Сбрасываем другие фильтры для чистоты? Оставим, но можно сбросить жанр и поиск
-      // По желанию: сбросить жанр и поиск, чтобы показать все книги автора
+      // Сбрасываем другие фильтры для чистоты
       setSelectedGenre("Все жанры");
       setSearchTerm("");
     }
