@@ -6,22 +6,17 @@ import SearchBar from "./components/ui/SearchBar";
 import GenreFilter from "./components/ui/GenreFilter";
 
 function App() {
-  // Состояние книг (доступность изменяется)
   const [books, setBooks] = useState(initialBooks);
 
-  // ========== ОТЛАДОЧНЫЙ ВЫВОД В КОНСОЛЬ (Console Tab) ==========
-  console.group('📚 BookLibrary App');
+  console.group('BookLibrary App');
   console.log('Всего книг в библиотеке:', books.length);
   console.table(books.map(b => ({ title: b.title, available: b.available })));
   console.groupEnd();
-  // ==============================================================
-
-  // Состояния фильтров
+  
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("Все жанры");
   const [selectedAuthorId, setSelectedAuthorId] = useState(null);
 
-  // Обработчик взятия книги
   const handleBorrow = (bookId) => {
     setBooks(prevBooks =>
       prevBooks.map(book =>
@@ -30,15 +25,15 @@ function App() {
           : book
       )
     );
-    // Можно добавить уведомление
+
     const book = books.find(b => b.id === bookId);
-    alert(`✅ Книга "${book?.title}" взята! (теперь недоступна)`);
+    alert(`Книга "${book?.title}" взята! (теперь недоступна)`);
   };
 
-  // Обработчик подробной информации о книге
+
   const handleDetails = (book) => {
     alert(
-      `📖 Подробнее о книге:\n\n` +
+      `Подробнее о книге:\n\n` +
       `Название: ${book.title}\n` +
       `Автор: ${book.author}\n` +
       `Жанр: ${book.genre}\n` +
@@ -48,29 +43,22 @@ function App() {
     );
   };
 
-  // Обработчик поиска
   const handleSearch = (term) => {
     setSearchTerm(term);
-    // При поиске сбрасываем фильтр автора
     if (selectedAuthorId) setSelectedAuthorId(null);
   };
 
-  // Обработчик выбора жанра
   const handleGenreSelect = (genre) => {
     setSelectedGenre(genre);
-    // При смене жанра сбрасываем фильтр автора
     if (selectedAuthorId) setSelectedAuthorId(null);
   };
 
-  // Обработчик показа книг автора
   const handleViewAuthorBooks = (authorId) => {
-    // Если уже выбран этот автор, сбрасываем фильтр, иначе устанавливаем
     if (selectedAuthorId === authorId) {
       setSelectedAuthorId(null);
     } else {
       setSelectedAuthorId(authorId);
-      // Сбрасываем другие фильтры для чистоты
-      setSelectedGenre("Все жанры");
+        setSelectedGenre("Все жанры");
       setSearchTerm("");
     }
   };
@@ -78,14 +66,12 @@ function App() {
   // Фильтрация книг
   let filteredBooks = [...books];
 
-  // 1. Если выбран конкретный автор – показываем только его книги
   if (selectedAuthorId !== null) {
     const author = authors.find(a => a.id === selectedAuthorId);
     if (author) {
       filteredBooks = filteredBooks.filter(book => book.author === author.name);
     }
   } else {
-    // 2. Фильтр по поиску (по названию или автору)
     if (searchTerm.trim() !== "") {
       const term = searchTerm.toLowerCase();
       filteredBooks = filteredBooks.filter(
@@ -94,18 +80,15 @@ function App() {
           book.author.toLowerCase().includes(term)
       );
     }
-    // 3. Фильтр по жанру (если не "Все жанры")
     if (selectedGenre !== "Все жанры") {
       filteredBooks = filteredBooks.filter(book => book.genre === selectedGenre);
     }
   }
 
-  // Получение имени выбранного автора для отображения
   const selectedAuthor = selectedAuthorId
     ? authors.find(a => a.id === selectedAuthorId)
     : null;
 
-  // Стили
   const headerStyle = {
     backgroundColor: "#2c3e50",
     color: "white",
@@ -169,32 +152,32 @@ function App() {
   return (
     <div>
       <header style={headerStyle}>
-        <h1 style={{ fontSize: "28px", marginBottom: "8px" }}>📖 BookLibrary</h1>
+        <h1 style={{ fontSize: "28px", marginBottom: "8px" }}>BookLibrary</h1>
         <p style={{ fontSize: "14px", opacity: 0.8 }}>Ваша персональная библиотека</p>
       </header>
 
       <main style={mainStyle}>
-        {/* Поиск */}
+        {}
         <SearchBar searchTerm={searchTerm} onSearch={handleSearch} />
 
-        {/* Фильтр по жанрам */}
+        {}
         <GenreFilter
           genres={genres}
           selectedGenre={selectedGenre}
           onSelectGenre={handleGenreSelect}
         />
 
-        {/* Информация о текущих фильтрах */}
+        {}
         <div style={filterInfoStyle}>
           <span>
             {selectedAuthorId ? (
-              <>📘 Показаны книги автора: <strong>{selectedAuthor?.name}</strong></>
+              <>Показаны книги автора: <strong>{selectedAuthor?.name}</strong></>
             ) : searchTerm ? (
-              <>🔍 Результаты поиска: <strong>"{searchTerm}"</strong></>
+              <>Результаты поиска: <strong>"{searchTerm}"</strong></>
             ) : selectedGenre !== "Все жанры" ? (
-              <>🏷️ Жанр: <strong>{selectedGenre}</strong></>
+              <>Жанр: <strong>{selectedGenre}</strong></>
             ) : (
-              <>📚 Показаны все книги ({filteredBooks.length})</>
+              <>Показаны все книги ({filteredBooks.length})</>
             )}
           </span>
           {(selectedAuthorId || searchTerm || selectedGenre !== "Все жанры") && (
@@ -204,12 +187,12 @@ function App() {
           )}
         </div>
 
-        {/* Список книг */}
+        {}
         <div style={sectionStyle}>
-          <h2 style={sectionTitleStyle}>📚 Книги ({filteredBooks.length})</h2>
+          <h2 style={sectionTitleStyle}> Книги ({filteredBooks.length})</h2>
           {filteredBooks.length === 0 ? (
             <p style={{ textAlign: "center", color: "#888", padding: "40px" }}>
-              😕 Книги не найдены. Попробуйте изменить фильтры.
+              Книги не найдены. Попробуйте изменить фильтры.
             </p>
           ) : (
             <div style={gridStyle}>
@@ -225,9 +208,9 @@ function App() {
           )}
         </div>
 
-        {/* Список авторов */}
+        {}
         <div style={sectionStyle}>
-          <h2 style={sectionTitleStyle}>👨‍💼 Авторы ({authors.length})</h2>
+          <h2 style={sectionTitleStyle}>Авторы ({authors.length})</h2>
           <div style={gridStyle}>
             {authors.map(author => (
               <AuthorCard

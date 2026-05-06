@@ -1,8 +1,7 @@
 /**
- * Поиск книг по названию или автору (регистронезависимый)
- * @param {Array} books - массив книг
- * @param {string} query - поисковый запрос
- * @returns {Array} отфильтрованный массив книг
+ * @param {Array} books 
+ * @param {string} query 
+ * @returns {Array} 
  */
 export const searchBooks = (books, query) => {
   if (!query || query.trim() === '') return books;
@@ -14,10 +13,9 @@ export const searchBooks = (books, query) => {
 };
 
 /**
- * Фильтрация книг по жанру
- * @param {Array} books - массив книг
- * @param {string} genre - жанр (если "Все жанры" – возвращаем все книги)
- * @returns {Array} отфильтрованный массив книг
+ * @param {Array} books 
+ * @param {string} genre 
+ * @returns {Array} 
  */
 export const filterByGenre = (books, genre) => {
   if (!genre || genre === 'Все жанры') return books;

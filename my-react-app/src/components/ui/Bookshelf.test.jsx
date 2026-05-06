@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Bookshelf from './Bookshelf';
 
@@ -16,22 +16,27 @@ describe('Bookshelf', () => {
 
   test('добавляет книгу на полку при клике на "Взять книгу"', async () => {
     render(<Bookshelf availableBooks={mockAvailableBooks} onBorrow={() => {}} />);
-    const borrowButtons = screen.getAllByText('📖 Взять книгу');
+    const borrowButtons = screen.getAllByText('Взять книгу');
+    // берём первую книгу (Книга A)
     await userEvent.click(borrowButtons[0]);
     expect(screen.getByText('Мои книги (1)')).toBeInTheDocument();
-    expect(screen.getByText('Книга A')).toBeInTheDocument(); // книга появилась на полке
+
+    const myBooksSection = screen.getByTestId('bookshelf').querySelector('.my-books');
+    expect(myBooksSection).toHaveTextContent('Книга A');
   });
 
   test('удаляет книгу с полки', async () => {
     render(<Bookshelf availableBooks={mockAvailableBooks} onBorrow={() => {}} />);
-    // Добавляем книгу
-    const borrowButtons = screen.getAllByText('📖 Взять книгу');
+   
+    const borrowButtons = screen.getAllByText('Взять книгу');
     await userEvent.click(borrowButtons[0]);
     expect(screen.getByText('Мои книги (1)')).toBeInTheDocument();
-    
-    // Находим кнопку удаления на полке (она тоже имеет текст "📖 Взять книгу", но в контексте полки)
-    const removeButtons = screen.getAllByText('📖 Взять книгу');
-    await userEvent.click(removeButtons[1]); // вторая кнопка (первая – доступная книга)
+
+   
+    const myBooksSection = screen.getByTestId('bookshelf').querySelector('.my-books');
+    const removeButtons = myBooksSection.querySelectorAll('button');
+    await userEvent.click(removeButtons[0]); // кнопка "Взять книгу" внутри моей полки
+
     expect(screen.getByText('Мои книги (0)')).toBeInTheDocument();
   });
 });

@@ -22,7 +22,7 @@ describe('BookCard', () => {
 
   test('кнопка "Взять книгу" активна, если книга доступна', () => {
     render(<BookCard book={mockBook} onBorrow={() => {}} onDetails={() => {}} />);
-    const borrowButton = screen.getByText('📖 Взять книгу');
+    const borrowButton = screen.getByText('Взять книгу');
     expect(borrowButton).not.toBeDisabled();
   });
 
@@ -36,7 +36,7 @@ describe('BookCard', () => {
   test('вызов onBorrow при клике на кнопку', () => {
     const mockOnBorrow = jest.fn();
     render(<BookCard book={mockBook} onBorrow={mockOnBorrow} onDetails={() => {}} />);
-    fireEvent.click(screen.getByText('📖 Взять книгу'));
+    fireEvent.click(screen.getByText('Взять книгу'));
     expect(mockOnBorrow).toHaveBeenCalledWith(1);
   });
 

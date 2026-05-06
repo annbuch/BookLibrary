@@ -22,13 +22,13 @@ function AuthorCard({ author, onViewBooks, isSelected }) {
       onMouseLeave={(e) => { if (!isSelected) e.currentTarget.style.transform = "translateY(0)"; }}
     >
       <div style={{ width: "80px", height: "80px", backgroundColor: "#4a90e2", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 15px", fontSize: "32px", color: "white" }}>
-        📚
+        {"\u{1F4DA}"}
       </div>
       <h3 style={{ fontSize: "18px", fontWeight: "600", marginBottom: "8px" }}>{author.name}</h3>
       <p style={{ fontSize: "13px", color: "#666", marginBottom: "6px" }}><strong>Год рождения:</strong> {author.birthYear}</p>
       <p style={{ fontSize: "13px", color: "#666", marginBottom: "6px" }}><strong>Страна:</strong> {author.country}</p>
       <div style={{ display: "inline-block", backgroundColor: "#e8f4fd", color: "#4a90e2", padding: "4px 12px", borderRadius: "20px", fontSize: "12px", margin: "12px 0" }}>
-        📖 {author.bookCount} книга(и)
+         {author.bookCount} книга(и)
       </div>
       <button
         onClick={handleClick}

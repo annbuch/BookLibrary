@@ -73,7 +73,7 @@ function BookCard({ book, onBorrow, onDetails }) {
           onMouseEnter={(e) => { if (book.available) e.target.style.opacity = "0.8"; }}
           onMouseLeave={(e) => { if (book.available) e.target.style.opacity = "1"; }}
         >
-          {book.available ? "📖 Взять книгу" : "❌ Недоступна"}
+          {book.available ? "Взять книгу" : "Недоступна"}
         </button>
         <button
           onClick={handleDetails}
